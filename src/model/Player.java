@@ -41,6 +41,11 @@ public class Player extends Entity{
 
         updateHitbox(); // Update the hitbox position after moving.
 
+        // NOTE: InputHandler will fire each frame 60 times a second
+        // Pressing right key, moveRight will set xVelocity to 5
+        // The next frame, if you are still holding key, gets set back to 5
+        // If you release the key, xVelocity will be set to 0.
+        // EXTENSION, find if you can add frictional physics to this game for enhanced math logic and smoothness
         xVelocity = 0; // Reset horizontal velocity after each update
 
     }
