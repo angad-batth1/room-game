@@ -1,7 +1,9 @@
+package model;
+
 import java.awt.Rectangle;
 
 public abstract class Entity {
-    // Stati counter for all entities
+    // Static counter for all entities
     // Exists at class level, not object level, to share data
     private static int nextId = 1;
     // Intance variables for all entities in the game. 
