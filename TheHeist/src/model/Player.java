@@ -24,6 +24,10 @@ public class Player extends Entity{
         this.isGrounded = false;
     }
 
+    /**
+     * This fulfills the abstract requirement from entity
+     * This runs every single frame of the game loop.
+     */
     @Override
     public void update(){
         // apply gravity to y velocity
@@ -35,5 +39,12 @@ public class Player extends Entity{
         setX(getX() + xVelocity);
         setY(getY() + yVelocity);
 
+        updateHitbox(); // Update the hitbox position after moving.
+
+        xVelocity = 0; // Reset horizontal velocity after each update
+
     }
+
+    // TODO: add controller methods and getters/setter.
+    // moveLeft, moveRight, jump, toggleStealth, addJewel, isStealthActive, getJewelsCollected, setGrounded.
 }
