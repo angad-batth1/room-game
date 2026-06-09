@@ -44,38 +44,74 @@ public abstract class Entity {
         this.hitbox.setLocation((int) x, (int) y);
     }
 
+    /**
+     * Getter for the x coordinate of the entity
+     * @return the x coordinate
+     */
     public double getX(){
         return x;
     }
 
+    /**
+     * Setter for the x coordinate of the entity
+     * @param x the new x coordinate to set
+     */
     public void setX(double x){
         this.x = x;
     }
 
+    /**
+     * Getter for the y coordinate of the entity
+     * @return the y coordinate
+     */
     public double getY(){
         return y;
     }
 
+    /**
+     * Setter for the y coordinate of the entity
+     * @param y the new y coordinate to set
+     */
     public void setY(double y){
         this.y = y;
     }
 
+    /**
+     * Getter for the width of the entity
+     * @return the width of the entity
+     */
     public int getWidth(){
         return width;
     }
 
+    /**
+     * Getter for the height of the entity
+     * @return the height of the entity
+     */
     public int getHeight(){
         return height;
     }
 
+    /**
+     * Getter for the hitbox of the entity, used for collision detection
+     * @return the hitbox of the entity
+     */
     public Rectangle getHitbox(){
         return hitbox;
     }
 
+    /**
+     * Setter for the id of the entity, used to identify the type of entity
+     * @param id the new id to set
+     */
     public void setId(int id){
         this.id = id;
     }
 
+    /**
+     * Getter for the id of the entity, used to identify the type of entity
+     * @return the id of the entity
+     */
     public int getId(){
         return id;
     }
