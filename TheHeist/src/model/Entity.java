@@ -1,6 +1,9 @@
 import java.awt.Rectangle;
 
 public abstract class Entity {
+    // Stati counter for all entities
+    // Exists at class level, not object level, to share data
+    private static int nextId = 1;
     // Intance variables for all entities in the game. 
     private int id;
     private double x;
@@ -18,6 +21,7 @@ public abstract class Entity {
      * @param height the height of the entity
      */
     public Entity(double x, double y, int width, int height) {
+        this.id = nextId++; // Assign the current nextid to the specific object, then inrement it for next one.
         this.x = x;
         this.y = y;
         this.width = width;
