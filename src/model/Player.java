@@ -45,6 +45,71 @@ public class Player extends Entity{
 
     }
 
-    // TODO: add controller methods and getters/setter.
-    // moveLeft, moveRight, jump, toggleStealth, addJewel, isStealthActive, getJewelsCollected, setGrounded.
+    // Controller methods
+
+    /**
+     *  Method to move the player left, sets velocity
+     */
+    public void moveLeft(){
+        xVelocity = -(Constants.RUN_SPEED);
+    }
+
+    /**
+     * Method to move the player right, sets velocity
+     */
+    public void moveRight(){
+        xVelocity = Constants.RUN_SPEED;
+    }
+
+    /**
+     * Method to make the player jump, sets velocity and grounded state
+     */
+    public void jump(){
+        if(isGrounded){
+            yVelocity = Constants.JUMP_STRENGTH;
+            isGrounded = false;
+        }
+    }
+
+    // Gameplay methods
+
+    /**
+     * Method to toggle stealth mode on and off
+     */
+    public void toggleStealth(){
+        isStealthActive = !isStealthActive;
+    }
+
+    /**
+     * Method to add jewel to players ollection
+     */
+    public void addJewel(){
+        jewelsCollected++;
+    }
+
+    // Getters and setters
+
+    /**
+     * Method to check if stealth mode is active
+     * @return true if stealth mode is active, false otherwise
+     */
+    public boolean isStealthActive(){
+        return isStealthActive;
+    }
+    
+    /**
+     * Method to get the number of jewels collected by the player.
+     * @return the number of jewels collected
+     */
+    public int getJewelsCollected(){
+        return jewelsCollected;
+    }
+
+    /**
+     * Method to set if the player is grounded (on the ground)
+     * @param grounded set the boolean to gounded.
+     */
+    public void setGrounded(boolean grounded){
+        this.isGrounded = grounded;
+    }
 }
