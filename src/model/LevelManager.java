@@ -39,10 +39,35 @@ public class LevelManager{
                         currentLevelEntities.add(new Obstacle(xPos, yPos, 32, 32, 0));
                     }else if(currentChar == 'L'){
                         currentLevelEntities.add(new Obstacle(xPos, yPos, 32, 32, 10));
-
+                    }else if(currentChar == 'J'){
+                        currentLevelEntities.add(new Collectible(xPos, yPos, 32, 32, 100));
+                    }else if(currentChar == 'P'){
+                        player = new Player(xPos, yPos);
+                        currentLevelEntities.add(player);
                     }
                 }
+                row++;
             }
+            scanner.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
         }
     }
+    
+    public ArrayList<Entity> getEntities(){
+        return currentLevelEntities;
+    }
+
+    public Player getPlayer(){
+        return player;
+    }
+
+    /*
+    
+    Since each character represents a 32x32 pixel block on the screen
+    X is a solid wall, P is where the theif drops in, J is a jewel, L is a laser.
+    Empty spaces are for air. This way, our textfiles can simply be a map.
+    Without writing any code, we can load any number of levels.
+    
+    */
 }
