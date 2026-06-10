@@ -17,6 +17,12 @@ public class ScannerAlorithm{
         if(grid[row][col] != 2){
             return;
         }
-    
+        grid[row][col] = 3; // If isnt a solid wall, and its in bounds, its fake
+
+        // Scan north, south, west, east, branch out in all directions
+        revealHiddenRoom(grid, row - 1, col); // north
+        revealHiddenRoom(grid, row + 1, col); // south
+        revealHiddenRoom(grid, row, col -1); // west
+        revealHiddenRoom(grid, row, col +1); // east
     }
 }
