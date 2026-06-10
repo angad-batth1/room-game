@@ -6,7 +6,7 @@ package utils;
 3 = Revealed Wall (Transparent)
 */
 
-public class ScannerAlorithm{
+public class ScannerAlgorithm{
     
     public static void revealHiddenRoom(int[][] grid, int row, int col){
         // Base Case: Stop if the scan goes out of the map boundaries
