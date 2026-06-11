@@ -5,20 +5,18 @@ import java.awt.*;
 import java.awt.event.*;
 import view.Renderer;
 
-public class Gameloop implements ActionListener{
+public class GameLoop implements ActionListener{
     
     private Timer timer;
     private GameStateManager gsm;
     private Renderer renderer;
 
-    public GameLoop(GamestateManager gsm, Renderer renderer){
+    public GameLoop(GameStateManager gsm, Renderer renderer){
         this.gsm = gsm;
         this.renderer = renderer;
 
-        // Calculate the delay
-
-        // Intialize the swing timer, where 'this' means it will call the actionperformed method
-
+        int delay = 1000 / 60; // delay in miliseconds for 60 FPS (1000 ms / 60 frames = 16 ms)
+        this.timer = new Timer(delay, this); // Initialize the timer.
     }
 
     public void start(){
