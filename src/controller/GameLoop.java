@@ -27,7 +27,7 @@ public class GameLoop implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
-        // update all the game math
-        // update the visual graphics of the screen.
+        gsm.update();
+        renderer.repaint();
     }
 }
