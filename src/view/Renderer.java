@@ -2,23 +2,33 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-
+import controller.GameStateManager;
 import model.Player;
 import utils.Constants;
 
 public class Renderer extends JPanel{
     // temp instance of theif just to test the screen
-    private Player placeholderTheif;
+    private GameStateManager gsm;
 
     public Renderer(){
-        // set background color of the panel to black
-        setBackground(Color.BLACK);
-        placeholderTheif = new Player(Constants.SCREEN_WIDTH/2.0, 100);
+        setDoubleBuffered(true);
+    }
+
+    /**
+     * Connects the rendering canvas to the state manager
+     * @param gsm
+     */
+    public void setGSM(GameStateManager gsm){
+        this.gsm = gsm;
     }
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
+        super.paintComponent(g); // first wipe the previouys frame clean
+        Graphics2D g2d = (Graphics2D) g;
+        if(gsm !=null){ // if the manager is plugged, let it handle drawing.
+            gsm.render(g2d);
+        }
         /*
         Instead of using the standard Graphics object, for this project,
         it is more beneficial to use Graphics 2D because it extends the original
@@ -28,6 +38,7 @@ public class Renderer extends JPanel{
         - TO DO: Re-implement Graphics strategy
         */
 
+        /* 
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.WHITE);
         g2d.fillRect(
@@ -36,5 +47,6 @@ public class Renderer extends JPanel{
             placeholderTheif.getWidth(),
             placeholderTheif.getHeight()
         );
+        */
     }
 }

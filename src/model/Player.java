@@ -117,4 +117,8 @@ public class Player extends Entity{
     public void setGrounded(boolean grounded){
         this.isGrounded = grounded;
     }
+
+    public void resetYVelocity(){
+        this.yVelocity = 0;
+    }
 }

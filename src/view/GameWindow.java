@@ -1,6 +1,7 @@
 package view; 
 
 import javax.swing.*;
+import controller.*;
 import utils.Constants;
 
 public class GameWindow{
@@ -17,7 +18,24 @@ public class GameWindow{
 
         // Instead of doing frame.add with a method, lets use renderer class to add our drawing canvas to this window
         Renderer renderer = new Renderer();
+        InputHandler input = new InputHandler();
+        GameStateManager gsm = new GameStateManager();
+        renderer.setGSM(gsm);
+
+        // add the keyboard listeners to the canvas
+        renderer.addKeyListener(input);
+        renderer.setFocusable(true); // tells java panel is allowed to hear keyboard
+
+        // load the first screen into the stack
+        gsm.pushState(new PlayState(gsm, input));
+
+
+        // add canvas to window and show
         frame.add(renderer);
         frame.setVisible(true);
+
+        // start the game
+        GameLoop gameLoop = new GameLoop(gsm, renderer);
+        gameLoop.start();
     }
 }
