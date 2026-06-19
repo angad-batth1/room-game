@@ -2,6 +2,9 @@ package model;
 
 import java.awt.Rectangle;
 
+/**
+ * @author Gurangad Batth
+ */
 public abstract class Entity {
     // Static counter for all entities
     // Exists at class level, not object level, to share data

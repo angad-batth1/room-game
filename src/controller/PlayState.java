@@ -137,9 +137,14 @@ public class PlayState extends GameState{
             // temporary placeholders untill we get sprites.
             if(e instanceof Player){
                 g2d.setColor(Color.CYAN);
-            }else if (e instanceof Obstacle){
-                g2d.setColor(Color.RED); // walls and lasers
-            }else if (e instanceof Collectible){
+            }else if(e instanceof Obstacle){
+                Obstacle obs = (Obstacle) e;
+                if(obs.getDamage() > 0){
+                    g2d.setColor(Color.RED); // lasers
+                }else {
+                    g2d.setColor(Color.GRAY); // walls - gray
+                }
+            }else if(e instanceof Collectible){
                 g2d.setColor(Color.YELLOW); // jewels
             }
             g2d.fillRect((int) e.getX(), (int) e.getY(), e.getWidth(), e.getHeight());
