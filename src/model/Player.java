@@ -121,4 +121,8 @@ public class Player extends Entity{
     public void resetYVelocity(){
         this.yVelocity = 0;
     }
+
+    public double getYVelocity(){
+        return this.yVelocity;
+    }
 }

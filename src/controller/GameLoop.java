@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import view.Renderer;
 
+/**
+ * 
+ */
 public class GameLoop implements ActionListener{
     
     private Timer timer;

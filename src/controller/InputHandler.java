@@ -82,6 +82,12 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
         
     }
 
+    public void resetKeys(){
+        for(int i = 0; i < keys.length; i++){
+            keys[i] = false;
+        }
+    }
+
     // Unused mandatory methods
     public void keyTyped(KeyEvent e) {}
     public void mouseClicked(MouseEvent e) {}

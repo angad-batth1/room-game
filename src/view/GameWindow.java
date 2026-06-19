@@ -27,7 +27,7 @@ public class GameWindow{
         renderer.setFocusable(true); // tells java panel is allowed to hear keyboard
 
         // load the first screen into the stack
-        gsm.pushState(new PlayState(gsm, input));
+        gsm.pushState(new MainMenuState(gsm, input));
 
 
         // add canvas to window and show
