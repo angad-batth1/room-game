@@ -4,12 +4,25 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import utils.Constants;
 
+/**
+ * displays the game over screen showing the final result win/loss and the player's scor.
+ * handles the user input to return to the main menu when Enter is pressed.
+ * @author Gurangad Batth
+ */
 public class GameOverState extends GameState {
+    // instance variables
     private InputHandler input;
     private String message;
     private int score;
     private GameStateManager gsm;
 
+    /**
+     * constructor for the game over state
+     * @param gsm the game state manager for transitioning between states
+     * @param input the input handler to detect player input
+     * @param message the win/loss message to display
+     * @param score the final score to display
+     */
     public GameOverState(GameStateManager gsm, InputHandler input, String message, int score){
         super(gsm);
         this.input = input;
@@ -18,15 +31,22 @@ public class GameOverState extends GameState {
         this.gsm = gsm;
     }
 
+    /**
+     * updates the game state by checking for Enter key press to return to main menu
+     */
     @Override
     public void update(){
-        // Rreturn to the main menu when enter is pressed
+        // Return to the main menu when enter is pressed
         if(input.isKeyDown(KeyEvent.VK_ENTER)){
             input.resetKeys(); // wipe enter key before transition
             gsm.setState(new MainMenuState(gsm, input));
         }
     }
 
+    /**
+     * renders the game over screen with the final message, score, and the instructions
+     * @param g2d the Graphics2D object used for drawing
+     */
     @Override
     public void render(Graphics2D g2d){
         g2d.setColor(Color.DARK_GRAY);

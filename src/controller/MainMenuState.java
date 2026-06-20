@@ -4,25 +4,41 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import utils.Constants;
 
+/**
+ * The main menu screen of the game. Displays the title and instructions,
+ * and transitions to the PlayState when Enter is pressed.
+ */
 public class MainMenuState extends GameState {
     private InputHandler input;
     private GameStateManager gsm;
 
+    /**
+     * this is the contructor for the main menu state
+     * @param gsm the game state manager for transitioning to play state
+     * @param input the input handler to detect Enter key press
+     */
     public MainMenuState(GameStateManager gsm, InputHandler input){
         super(gsm);
         this.input = input;
         this.gsm = gsm;
     }
 
+    /**
+     * Updates the menu state by checking if Enter is pressed to start the game
+     */
     @Override
     public void update(){
-        // go to game when enter is pressed
+        // go to level 1 when enter is pressed
         if(input.isKeyDown(KeyEvent.VK_ENTER)){
             input.resetKeys();
             gsm.setState(new PlayState(gsm,input, 1, 0));
         }
     }
 
+    /**
+     * Renders the main menu screen with title, instructions, and controls
+     * @param g2d the Graphics2D object used for drawing
+     */
     @Override
     public void render(Graphics2D g2d){
         // draw background

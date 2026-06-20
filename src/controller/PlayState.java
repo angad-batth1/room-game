@@ -5,6 +5,11 @@ import model.*;
 import utils.*;
 import java.util.Iterator;
 
+/**
+ * Represents the gameplay state where the player navigates a level, collects jewels, and avoids obstacles.
+ * Handles level loading, player input, physics updates, collision detection, and win/loss conditions.
+ * @author Gurangad Batth
+ */
 public class PlayState extends GameState{
     // instances
     private LevelManager levelManager;
@@ -15,13 +20,20 @@ public class PlayState extends GameState{
     // We will change this incase we add more levels
     private final int MAX_LEVELS = 6;
 
-    // constructor
+    /**
+     * Constructor for the play state, loads the specified level and restores the player's score
+     * @param gsm the game state manager for state transitions
+     * @param input the input handler for player controls
+     * @param level the level number to load
+     * @param score the cumulative jewels collected from previous levels
+     */
     public PlayState(GameStateManager gsm, InputHandler input, int level, int score){
         super(gsm);
         this.input = input;
         this.currentLevel = level;
         // Initialize the level and load the map text file
         this.gsm = gsm;
+        this.totalScore = score;
         levelManager = new LevelManager();
         levelManager.loadLevel("assets/levels/level" + currentLevel + ".txt");
 
@@ -34,6 +46,10 @@ public class PlayState extends GameState{
         }
     }
 
+    /**
+     * Updates the game state each frame: processes input, checks win conditions, updates physics,
+     * handles collisions, and manages state transitions
+     */
     @Override
     public void update(){
         Player player = levelManager.getPlayer();
@@ -127,6 +143,11 @@ public class PlayState extends GameState{
         }
     }
 
+    /**
+     * Renders the current level including the background, all entities (player, obstacles, jewels),
+     * and the heads-up display showing level and score
+     * @param g2d the Graphics2D object used for drawing
+     */
     @Override
     public void render(Graphics2D g2d){
         // set the background

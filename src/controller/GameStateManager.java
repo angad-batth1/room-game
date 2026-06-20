@@ -3,6 +3,10 @@ package controller;
 import java.awt.Graphics2D;
 import java.util.Stack;
 
+/**
+ * manages the game state stack, handling transitions between different screens/states.
+ * it uses a stack-based approach to allow pushing, popping, and replacing game states.
+ */
 public class GameStateManager{
     // This is our stack instance that will manage the state of the game
     private Stack<GameState> states;
@@ -35,7 +39,7 @@ public class GameStateManager{
     /**
      * Replaces the current screen entirely.
      * an example is switching from the main menu to level 1
-     * @param state
+     * @param state the state to be set
      */
     public void setState(GameState state){
         if(!states.isEmpty()){

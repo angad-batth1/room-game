@@ -6,6 +6,11 @@ import org.junit.Test;
 
 import utils.ScannerAlgorithm;
 
+/**
+ * This is a tester class for the scanner algorithm
+ * Unfortunately, the algo did not make it to the final product but it showcases recursion and JUnit testing
+ * @author Gurangad Batth
+ */
 public class TestScannerAlgorithm {
     
     @Test

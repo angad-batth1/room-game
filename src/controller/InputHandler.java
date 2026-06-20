@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.swing.SwingUtilities;
 
 /**
+ * THIS IS A CLASS TAKEN FROM MR. LAMONTS CODE
  * @author Mr. Lamont
  */
 public class InputHandler implements KeyListener, MouseListener, MouseMotionListener {

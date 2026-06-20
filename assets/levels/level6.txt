@@ -2,17 +2,17 @@ XXXXXXXXXXXXXXXXXXXXXXXXX
 X                       X
 X                       X
 X                       X
-XXXXXXXXXXXXXXXXXXXXXXXXX
+X     X                 X
 X                       X
-X                       X
-X                       X
-X                J      X
-X P     J               X
-XXXXXXXXXXXXXXXXXXXXXXXXX
-X                       X
-X                       X
-X                       X
-X                       X
-X                       X
-X                       X
+X    L  XXX             X
+X L  L                  X
+X L  L      XXX         X
+X L  L                  X
+X L  L          XXX     X
+XXX  XXX                X
+X      XX               X
+X      X X          XXXXX
+X      X  X             X
+X J  J X   X     XXX    X
+XJJJJJJX    XX P        X
 XXXXXXXXXXXXXXXXXXXXXXXXX

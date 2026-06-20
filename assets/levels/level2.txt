@@ -1,18 +1,18 @@
-XXXXXXXXXXXXXXXXXXXXXXXXX
-X                       X
-X                       X
-X                       X
-X  P                    X
-XXXXXXX                 X
-X           J           X
-X         XXXXXX        X
-X                       X
-X                 J     X
-X               XXXXX   X
-X                       X
-X   XXXX                X
-X          L            X
-X        XXXXX          X
-X                       X
-X                       X
-XXXXXXXXXXXXXXXXXXXXXXXXX
+LLLLLLLLLL        XLLLLLL
+L            JJJJJX    PL
+L           XXXXXXX  XXXL
+L                       L
+L        XX             L
+L                       X
+L      XX               X
+L                    XX X
+L    XX                 X
+L                       X
+L  XX                   X
+L                       X
+LXX    XLLLLLLLLLLLLLLL X
+LLXX    XXLLLLLLLLLLLLL X
+LLLXX     XLLLLLLLLLLLL X
+LLLLXXX                 X
+LLLLLLLXX               X
+LLLLLLLLLXXXXXXXXXXXXXXXX

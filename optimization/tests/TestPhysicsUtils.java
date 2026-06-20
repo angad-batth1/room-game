@@ -5,6 +5,10 @@ import org.junit.Test;
 import model.Entity;
 import utils.PhysicsUtils;
 
+/**
+ * This is a testing class used to test the physics of the game -- logic in physics utils
+ * @author Gurangad Batth
+ */
 public class TestPhysicsUtils {
 
     @Test
