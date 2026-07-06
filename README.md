@@ -1,6 +1,6 @@
 # The Heist
 
-`The Heist` is a small Java room-platformer game where the player moves through dangerous rooms, collects every jewel, and avoids hazards to finish the run.
+`The Heist` is a small Java platformer game where the player moves through dangerous rooms, collects every jewel, and avoids hazards to finish the run. -art/sprites by GPT-5.5. It utilizes core java principles to dynamically load in levels and test functions for programming efficiency.
 
 ## What The Game Has
 
