@@ -1,44 +1,41 @@
 package controller;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import view.Renderer;
 
 /**
- * This is the heartbeat of the entire game, initializes gsm, rendeder, java timer and updates everything 
- * @author Gurangad Batth 
+ * This is the game loop class that updates the game and repaints the screen on a timer.
+ * @author Gurangad Batth
  */
 public class GameLoop implements ActionListener{
-    // Instances for timer, gsm and renderer
+
     private Timer timer;
     private GameStateManager gsm;
     private Renderer renderer;
 
     /**
-     * Constructor for the gameloop, caculates delay and then initializes timer
-     * @param gsm the game state manager being passed in
-     * @param renderer the renderer being bassed in
+     * This is the constructor for the game loop.
+     * @param gsm the game state manager that updates the active state
+     * @param renderer the renderer that repaints the active screen
      */
     public GameLoop(GameStateManager gsm, Renderer renderer){
         this.gsm = gsm;
         this.renderer = renderer;
-        int delay = 1000 / 60; // delay in miliseconds for 60 FPS (1000 ms / 60 frames = 16 ms)
-        this.timer = new Timer(delay, this); // Initialize the timer.
+        timer = new Timer(1000 / 60, this);
     }
 
     /**
-     * Starts the timer if it is not already running
+     * This method starts the timer driven game loop.
      */
     public void start(){
-        if(!timer.isRunning()){
-            timer.start();
-        }
+        timer.start();
     }
 
     /**
-     * Called by the timer at each frame to update the game state and redraw the screen
-     * @param e the action event triggered by the timer
+     * This method runs one frame of game logic and rendering whenever the timer fires.
+     * @param e the timer event for the current frame
      */
     @Override
     public void actionPerformed(ActionEvent e){

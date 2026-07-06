@@ -13,6 +13,9 @@ import utils.ScannerAlgorithm;
  */
 public class TestScannerAlgorithm {
     
+    /**
+     * This test checks that the recursive reveal fills every connected fake wall tile.
+     */
     @Test
     public void testFloorFillReveal(){
 

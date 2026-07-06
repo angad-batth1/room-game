@@ -6,47 +6,43 @@ import controller.GameStateManager;
 import model.Player;
 import utils.Constants;
 
+/**
+ * This is the renderer class that draws the active game state onto the screen.
+ * @author Gurangad Batth
+ */
 public class Renderer extends JPanel{
     // temp instance of theif just to test the screen
     private GameStateManager gsm;
 
+    /**
+     * This is the constructor for the renderer panel.
+     * It enables double buffering for smoother drawing.
+     */
     public Renderer(){
         setDoubleBuffered(true);
     }
 
     /**
-     * Connects the rendering canvas to the state manager
-     * @param gsm
+     * Connects the rendering canvas to the state manager.
+     * @param gsm the game state manager that supplies the current state to draw
      */
     public void setGSM(GameStateManager gsm){
         this.gsm = gsm;
     }
 
+    /**
+     * This method repaints the screen and delegates drawing to the active game state.
+     * @param g the graphics object used by Swing during painting
+     */
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g); // first wipe the previouys frame clean
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        if(gsm !=null){ // if the manager is plugged, let it handle drawing.
+
+        if(gsm != null){
             gsm.render(g2d);
         }
-        /*
-        Instead of using the standard Graphics object, for this project,
-        it is more beneficial to use Graphics 2D because it extends the original
-        Graphics class and gives access to more rendering rools I will need for my assets.
-        We can implement Graphics2D by casting it onto graphics.
-        - TO DO: Remove unnecessary imports from awt & swing packages post graphics production
-        - TO DO: Re-implement Graphics strategy
-        */
 
-        /* 
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(
-            (int) placeholderTheif.getX(),
-            (int) placeholderTheif.getY(),
-            placeholderTheif.getWidth(),
-            placeholderTheif.getHeight()
-        );
-        */
+        Toolkit.getDefaultToolkit().sync();
     }
 }

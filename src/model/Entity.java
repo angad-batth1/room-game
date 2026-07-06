@@ -3,13 +3,15 @@ package model;
 import java.awt.Rectangle;
 
 /**
+ * This is the abstract parent entity class for anything that exists physically in the game world.
+ * It stores position, dimensions, hitbox data, and a unique id.
  * @author Gurangad Batth
  */
 public abstract class Entity {
-    // Static counter for all entities
-    // Exists at class level, not object level, to share data
+
+    // all our entities need a unique ID or numerical value
     private static int nextId = 1;
-    // Intance variables for all entities in the game. 
+
     private int id;
     private double x;
     private double y;
@@ -18,71 +20,69 @@ public abstract class Entity {
     private Rectangle hitbox;;
 
     /**
-     * Constructor for the Entity class, all physical objets in the game
-     * @param id used to identify the type of entity, for example, 0, 1, 2, 3, 4 for the different types
-     * @param x the x-coordinate of the entity
-     * @param y the y-coordinate of the entity
+     * This is the constructor for an entity.
+     * @param x the starting x coordinate of the entity
+     * @param y the starting y coordinate of the entity
      * @param width the width of the entity
      * @param height the height of the entity
      */
     public Entity(double x, double y, int width, int height) {
-        this.id = nextId++; // Assign the current nextid to the specific object, then inrement it for next one.
+        this.id = nextId++;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        // Initialize the collision box exactly where the entity is
-        this.hitbox = new Rectangle((int) x, (int) y, width, height); 
+        this.hitbox = new Rectangle((int)x, (int)y, width, height);
     }
 
     /**
-     * This is the abstrat update method.
-     * Each Subclass of Entity will implement its own uniqur logic for this.
+     * This method updates the entity every frame.
      */
     public abstract void update(); 
 
     /**
-     * This method syncs the collision hitbox with the entity's current x/y coordinate
-     * We will call this inside the update methof of moving sublasses like Player.
+     * This method refreshes the hitbox so it matches the entity's current position.
      */
     public void updateHitbox(){
-        this.hitbox.setLocation((int) x, (int) y);
+        this.hitbox.setBounds((int)x, (int)y, width, height);
     }
 
     /**
-     * Getter for the x coordinate of the entity
-     * @return the x coordinate
+     * This method gets the current x coordinate.
+     * @return the x coordinate of the entity
      */
     public double getX(){
         return x;
     }
 
     /**
-     * Setter for the x coordinate of the entity
-     * @param x the new x coordinate to set
+     * This method sets the x coordinate of the entity.
+     * @param x the new x coordinate
      */
     public void setX(double x){
         this.x = x;
+        updateHitbox();
     }
 
     /**
-     * Getter for the y coordinate of the entity
-     * @return the y coordinate
+     * This method gets the current y coordinate.
+     * @return the y coordinate of the entity
      */
     public double getY(){
         return y;
     }
 
     /**
-     * Setter for the y coordinate of the entity
-     * @param y the new y coordinate to set
+     * This method sets the y coordinate of the entity.
+     * @param y the new y coordinate
      */
     public void setY(double y){
         this.y = y;
+        updateHitbox();
     }
 
     /**
-     * Getter for the width of the entity
+     * This method gets the width of the entity.
      * @return the width of the entity
      */
     public int getWidth(){
@@ -90,7 +90,7 @@ public abstract class Entity {
     }
 
     /**
-     * Getter for the height of the entity
+     * This method gets the height of the entity.
      * @return the height of the entity
      */
     public int getHeight(){
@@ -98,24 +98,24 @@ public abstract class Entity {
     }
 
     /**
-     * Getter for the hitbox of the entity, used for collision detection
-     * @return the hitbox of the entity
+     * This method gets the hitbox rectangle of the entity.
+     * @return the hitbox rectangle
      */
     public Rectangle getHitbox(){
         return hitbox;
     }
 
     /**
-     * Setter for the id of the entity, used to identify the type of entity
-     * @param id the new id to set
+     * This method sets the id of the entity.
+     * @param id the new unique id value
      */
     public void setId(int id){
         this.id = id;
     }
 
     /**
-     * Getter for the id of the entity, used to identify the type of entity
-     * @return the id of the entity
+     * This method gets the unique id of the entity.
+     * @return the entity id
      */
     public int getId(){
         return id;

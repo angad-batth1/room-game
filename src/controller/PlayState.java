@@ -21,7 +21,7 @@ public class PlayState extends GameState{
     private final int MAX_LEVELS = 6;
 
     /**
-     * Constructor for the play state, loads the specified level and restores the player's score
+     * Constructor for the play state, loads the specified level and restores the player's score.
      * @param gsm the game state manager for state transitions
      * @param input the input handler for player controls
      * @param level the level number to load
@@ -48,7 +48,7 @@ public class PlayState extends GameState{
 
     /**
      * Updates the game state each frame: processes input, checks win conditions, updates physics,
-     * handles collisions, and manages state transitions
+     * handles collisions, and manages state transitions.
      */
     @Override
     public void update(){
@@ -81,99 +81,92 @@ public class PlayState extends GameState{
                 gsm.setState(new PlayState(gsm, input, currentLevel + 1, player.getJewelsCollected()));
             }
             else{
-                // we beat the final level, save to file and show the win screen
+                // we beat the final level, save to file and show game over screen
                 ScoreManager.saveScore(player.getJewelsCollected());
-                gsm.setState(new GameOverState(gsm, input, "Heists Successfull", player.getJewelsCollected()));
+                gsm.setState(new GameOverState(gsm, input, "Heist Complete!", player.getJewelsCollected()));
             }
-            return; // exit update method
+            return;
         }
 
-
-        // update the physics for all the entities using a enhanced for loop
+        // update all entities
         for(Entity e : levelManager.getEntities()){
             e.update();
         }
-        // reset the grounded state wach frame. we will prove they are on the ground below
-        player.setGrounded(false);
 
-        // I found this Java Iterator to be the best  way to safely delete items.
-        Iterator<Entity> it = levelManager.getEntities().iterator();
-        while(it.hasNext()){
-            Entity e = it.next();
-            // skip checking the player against themselves
-            if(e instanceof Player) continue;
-            // obstacles (walls and lasters)
-            if(e instanceof Obstacle){
-                Obstacle obs = (Obstacle) e;
-                // did we hit a laser
-                if(obs.getDamage() > 0 && PhysicsUtils.checkCollision(player, obs)){
-                    gsm.setState(new GameOverState(gsm, input, "KILLED BY LASER", player.getJewelsCollected())); // instantly reload the state
-                    return;
+        // handle player collisions and pickups
+        if(player != null){
+            player.setGrounded(false);
+
+            Iterator<Entity> iterator = levelManager.getEntities().iterator();
+            while(iterator.hasNext()){
+                Entity e = iterator.next();
+
+                if(e == player){
+                    continue;
                 }
-                // did we land on a wall
-                if (PhysicsUtils.isLandingOn(player, obs)){
-                    player.setY(obs.getY() - player.getHeight()); // Snap to the top of the block
-                    player.resetYVelocity(); // Stop gravity
-                    player.setGrounded(true); // Allow jumping again
-                    player.updateHitbox(); // Sync the collision box instantly
-                }else if(PhysicsUtils.checkCollision(player, obs)){
-                    // head on ceiling
-                    if(player.getYVelocity() < 0 && player.getY() > obs.getY()) {
-                        player.setY(obs.getY() + obs.getHeight());
-                        player.resetYVelocity();
-                    } 
-                    // hit left side of wall
-                    else if(player.getX() < obs.getX()){
-                        player.setX(obs.getX() - player.getWidth());
-                    } 
-                    // hit right side of wall
-                    else if(player.getX() > obs.getX()){
-                        player.setX(obs.getX() + obs.getWidth());
+
+                if(PhysicsUtils.checkCollision(player, e)){
+                    if(e instanceof Obstacle){
+                        Obstacle obstacle = (Obstacle) e;
+
+                        if(PhysicsUtils.isLandingOn(player, obstacle) && obstacle.getDamage() == 0 && player.getYVelocity() >= 0){
+                            player.setY(obstacle.getY() - player.getHeight());
+                            player.resetYVelocity();
+                            player.setGrounded(true);
+                        }
+                        else if(obstacle.getDamage() > 0){
+                            gsm.setState(new GameOverState(gsm, input, "Mission Failed", player.getJewelsCollected()));
+                            return;
+                        }
                     }
-                }
-                player.updateHitbox(); // sync hitbox after collision adjustment
-            } 
-            // collectibles and jewels
-            else if (e instanceof model.Collectible) {
-                if (PhysicsUtils.checkCollision(player, e)) {
-                    player.addJewel();
-                    it.remove(); // Safely delete the jewel from the map!
+                    else if(e instanceof Collectible){
+                        Collectible collectible = (Collectible) e;
+                        player.addJewel();
+                        totalScore += collectible.getScoreValue() / 100;
+                        iterator.remove();
+                    }
                 }
             }
         }
     }
 
     /**
-     * Renders the current level including the background, all entities (player, obstacles, jewels),
-     * and the heads-up display showing level and score
-     * @param g2d the Graphics2D object used for drawing
+     * Renders every entity for the current level and the on-screen score.
+     * @param g2d the graphics object used for drawing gameplay
      */
     @Override
     public void render(Graphics2D g2d){
-        // set the background
-        g2d.setColor(Color.BLACK);
-        g2d.fillRect(0, 0, utils.Constants.SCREEN_WIDTH, utils.Constants.SCREEN_HEIGHT);
-        // draw all the entities in the current level using a enhanced for loop.
+        // draw background
+        g2d.setColor(Color.DARK_GRAY);
+        g2d.fillRect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+
         for(Entity e : levelManager.getEntities()){
-            // temporary placeholders untill we get sprites.
             if(e instanceof Player){
                 g2d.setColor(Color.CYAN);
-            }else if(e instanceof Obstacle){
-                Obstacle obs = (Obstacle) e;
-                if(obs.getDamage() > 0){
-                    g2d.setColor(Color.RED); // lasers
-                }else {
-                    g2d.setColor(Color.GRAY); // walls - gray
-                }
-            }else if(e instanceof Collectible){
-                g2d.setColor(Color.YELLOW); // jewels
+                g2d.fillRect((int)e.getX(), (int)e.getY(), e.getWidth(), e.getHeight());
             }
-            g2d.fillRect((int) e.getX(), (int) e.getY(), e.getWidth(), e.getHeight());
+            else if(e instanceof Obstacle){
+                Obstacle obstacle = (Obstacle) e;
+                if(obstacle.getDamage() > 0){
+                    g2d.setColor(Color.RED);
+                }
+                else{
+                    g2d.setColor(Color.GRAY);
+                }
+                g2d.fillRect((int)e.getX(), (int)e.getY(), e.getWidth(), e.getHeight());
+            }
+            else if(e instanceof Collectible){
+                g2d.setColor(Color.YELLOW);
+                g2d.fillOval((int)e.getX(), (int)e.getY(), e.getWidth(), e.getHeight());
+            }
         }
 
-        // Draw a Heads up display so the player knows their progress
-        g2d.setColor(Color.WHITE);
-        g2d.drawString("Level: " + currentLevel, 10, 20);
-        g2d.drawString("Score: " + levelManager.getPlayer().getJewelsCollected(), 10, 40);
+        Player player = levelManager.getPlayer();
+        if(player != null){
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(new Font("Monospaced", Font.BOLD, 20));
+            g2d.drawString("Jewels: " + player.getJewelsCollected(), 20, 30);
+            g2d.drawString("Level: " + currentLevel, 20, 55);
+        }
     }
 }

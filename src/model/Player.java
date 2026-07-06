@@ -1,8 +1,12 @@
 package model;
 import utils.Constants;
 
+/**
+ * This is the player class that handles movement, jumping, gravity, and jewel tracking.
+ * @author Gurangad Batth
+ */
 public class Player extends Entity{
-    // Instane variables for the player class
+
     private double xVelocity;
     private double yVelocity;
     private boolean isStealthActive; // Track if stealth mode is active
@@ -10,42 +14,34 @@ public class Player extends Entity{
     private boolean isGrounded; // Is player on the ground (jumping)
 
     /**
-     * Constructor for the player class, initializes the player at a given position
-     * @param x the x coordinate to initialize the player at
-     * @param y the y coordinate to initialize the player at
+     * This is the constructor for the player.
+     * @param x the starting x coordinate of the player
+     * @param y the starting y coordinate of the player
      */
     public Player(double x, double y){
-        // Call superlass constructor to initialize position and hitbox
         super(x, y, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
-        this.xVelocity = 0;
-        this.yVelocity = 0;
-        this.isStealthActive = false;
-        this.jewelsCollected = 0;
-        this.isGrounded = false;
+        xVelocity = 0;
+        yVelocity = 0;
+        isStealthActive = false;
+        jewelsCollected = 0;
+        isGrounded = false;
     }
 
     /**
-     * This fulfills the abstract requirement from entity
-     * This runs every single frame of the game loop.
+     * This method updates the player position and applies gravity.
      */
     @Override
     public void update(){
-        // apply gravity to y velocity
+        // gravity physics
         yVelocity += Constants.GRAVITY;
         if(yVelocity > Constants.MAX_FALL_SPEED){
             yVelocity = Constants.MAX_FALL_SPEED;
         }
-        // apply velocity to position
+
         setX(getX() + xVelocity);
         setY(getY() + yVelocity);
 
-        updateHitbox(); // Update the hitbox position after moving.
-
-        // NOTE: InputHandler will fire each frame 60 times a second
-        // Pressing right key, moveRight will set xVelocity to 5
-        // The next frame, if you are still holding key, gets set back to 5
-        // If you release the key, xVelocity will be set to 0.
-        // EXTENSION, find if you can add frictional physics to this game for enhanced math logic and smoothness
+        // Add physics to this game for enhanced math logic and smoothness
         xVelocity = 0; // Reset horizontal velocity after each update
 
     }
@@ -118,10 +114,17 @@ public class Player extends Entity{
         this.isGrounded = grounded;
     }
 
+    /**
+     * This method resets the player's vertical velocity back to zero.
+     */
     public void resetYVelocity(){
         this.yVelocity = 0;
     }
 
+    /**
+     * This method gets the current vertical velocity of the player.
+     * @return the player's vertical velocity
+     */
     public double getYVelocity(){
         return this.yVelocity;
     }

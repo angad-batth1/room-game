@@ -11,6 +11,9 @@ import utils.PhysicsUtils;
  */
 public class TestPhysicsUtils {
 
+    /**
+     * This test checks that two overlapping hitboxes register a collision.
+     */
     @Test
     public void testCollisionOverlap(){
         Entity a = new DummyTester(0, 0, 32, 32);
@@ -18,6 +21,9 @@ public class TestPhysicsUtils {
         assertEquals(true, PhysicsUtils.checkCollision(a, b));
     }
 
+    /**
+     * This test checks that two separated hitboxes do not register a collision.
+     */
     @Test
     public void testNoCollision(){
         Entity a = new DummyTester(0, 0, 32, 32);
@@ -25,6 +31,9 @@ public class TestPhysicsUtils {
         assertEquals(false, PhysicsUtils.checkCollision(a, b));
     }
 
+    /**
+     * This test checks that landing logic detects an entity touching the top of a platform.
+     */
     @Test
     public void testLandingOnPlatform(){
         Entity player = new DummyTester(10, 20, 32, 32); // bottom is y=52

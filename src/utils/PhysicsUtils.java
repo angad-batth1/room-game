@@ -2,6 +2,10 @@ package utils;
 
 import model.Entity;
 
+/**
+ * This is the physics utility class that stores shared collision and landing helper logic.
+ * @author Gurangad Batth
+ */
 public class PhysicsUtils {
 
     // We will make a static method, so it can be used without an instance

@@ -2,6 +2,10 @@ package utils;
 
 import java.io.*;
 
+/**
+ * This is the score manager class that saves completed run scores to the highscores file.
+ * @author Gurangad Batth
+ */
 public class ScoreManager {
     // this is the path to the data file.
     private static final String HIGHSCORE_FILE = "assets/data/highscores.txt";

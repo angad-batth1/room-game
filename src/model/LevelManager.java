@@ -5,15 +5,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import utils.Constants;
 
+/**
+ * This is the level manager class that loads text based levels and spawns the entities inside them.
+ * @author Gurangad Batth
+ */
 public class LevelManager{
 
     private ArrayList<Entity> currentLevelEntities; // array list to hold all the active game objects
     private Player player; // We will keep a direct reference to player to make GameLoop code easier
 
+    /**
+     * This is the constructor for the level manager.
+     * It initializes the entity list for the current level.
+     */
     public LevelManager(){ 
         currentLevelEntities = new ArrayList<>();
     }
 
+    /**
+     * This method loads a level file and converts each map character into an entity.
+     * @param filepath the path to the text file representing the level map
+     */
     public void loadLevel(String filepath){
         // Clear old entities if we are loading a new level
         currentLevelEntities.clear();
@@ -54,10 +66,18 @@ public class LevelManager{
         }
     }
     
+    /**
+     * This method gets every active entity in the current level.
+     * @return the list of current level entities
+     */
     public ArrayList<Entity> getEntities(){
         return currentLevelEntities;
     }
 
+    /**
+     * This method gets the player entity for the current level.
+     * @return the player of the current level, or null if none exists
+     */
     public Player getPlayer(){
         return player;
     }

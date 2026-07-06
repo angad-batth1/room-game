@@ -4,10 +4,18 @@ import javax.swing.*;
 import controller.*;
 import utils.Constants;
 
+/**
+ * This is the main game window class that builds the JFrame and starts the game systems.
+ * @author Gurangad Batth
+ */
 public class GameWindow{
     // Our only instance is the JFrame
     private JFrame frame;
 
+    /**
+     * This is the constructor for the game window.
+     * It sets up the frame, renderer, input, first state, and game loop.
+     */
     public GameWindow(){
         // Initialize the JFrame, set size, close operation.
         frame = new JFrame("Platformer Game");

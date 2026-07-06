@@ -4,31 +4,31 @@ import java.awt.Graphics2D;
 import java.util.Stack;
 
 /**
- * manages the game state stack, handling transitions between different screens/states.
- * it uses a stack-based approach to allow pushing, popping, and replacing game states.
+ * This is the game state manager class that controls the active game state stack.
+ * @author Gurangad Batth
  */
 public class GameStateManager{
-    // This is our stack instance that will manage the state of the game
+
     private Stack<GameState> states;
 
     /**
-     * Constructor for gamestatemanager
+     * This is the constructor for the game state manager.
+     * It initializes the internal state stack.
      */
     public GameStateManager(){
-        this.states = new Stack<>();
+        states = new Stack<>();
     }
 
     /**
-     * Adds a new screen to the top of the stack
-     * an example is pushing a pause menu over the active game
-     * @param state the state to be pushed
+     * This method pushes a new state onto the stack.
+     * @param state the state being added to the top of the stack
      */
     public void pushState(GameState state){
         states.push(state);
     }
 
     /**
-     * Removes the current screen, returning to whatever was beneath it
+     * This method removes the current state from the top of the stack.
      */
     public void popState(){
         if(!states.isEmpty()){
@@ -37,30 +37,26 @@ public class GameStateManager{
     }
 
     /**
-     * Replaces the current screen entirely.
-     * an example is switching from the main menu to level 1
-     * @param state the state to be set
+     * This method replaces the current state with a new one.
+     * @param state the new state that should become active
      */
     public void setState(GameState state){
-        if(!states.isEmpty()){
-            states.pop();
-        }
-        states.push(state);
+        popState();
+        pushState(state);
     }
 
     /**
-     * Updates only the math of the screen at the top of the stack
+     * This method updates the state at the top of the stack.
      */
     public void update(){
-        // .peek() looks at the top item without removing it
         if(!states.isEmpty()){
             states.peek().update();
         }
     }
 
     /**
-     * Draws only the graphics of the screen at the top of the stack
-     * @param g2d the graphics to be added to stack
+     * This method renders the state at the top of the stack.
+     * @param g2d the graphics object used to draw the active state
      */
     public void render (Graphics2D g2d){
         if(!states.isEmpty()){

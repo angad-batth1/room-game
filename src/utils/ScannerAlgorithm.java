@@ -6,8 +6,18 @@ package utils;
 3 = Revealed Wall (Transparent)
 */
 
+/**
+ * This is the scanner algorithm class that recursively reveals connected hidden room tiles.
+ * @author Gurangad Batth
+ */
 public class ScannerAlgorithm{
     
+    /**
+     * This method uses recursion to reveal all connected fake wall tiles starting from a given cell.
+     * @param grid the map grid being scanned
+     * @param row the starting row coordinate
+     * @param col the starting column coordinate
+     */
     public static void revealHiddenRoom(int[][] grid, int row, int col){
         // Base Case: Stop if the scan goes out of the map boundaries
         if(row < 0 || row >= grid.length || col < 0 || col >= grid[0].length){

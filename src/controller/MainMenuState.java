@@ -5,8 +5,9 @@ import java.awt.event.KeyEvent;
 import utils.Constants;
 
 /**
- * The main menu screen of the game. Displays the title and instructions,
- * and transitions to the PlayState when Enter is pressed.
+ * This is the main menu state of the game.
+ * It draws the title screen and transitions to gameplay when Enter is pressed.
+ * @author Gurangad Batth
  */
 public class MainMenuState extends GameState {
     private InputHandler input;
@@ -24,7 +25,7 @@ public class MainMenuState extends GameState {
     }
 
     /**
-     * Updates the menu state by checking if Enter is pressed to start the game
+     * Updates the menu state by checking if Enter is pressed to start the game.
      */
     @Override
     public void update(){
@@ -36,7 +37,7 @@ public class MainMenuState extends GameState {
     }
 
     /**
-     * Renders the main menu screen with title, instructions, and controls
+     * Renders the main menu screen with title, instructions, and controls.
      * @param g2d the Graphics2D object used for drawing
      */
     @Override

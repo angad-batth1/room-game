@@ -1,5 +1,9 @@
 package utils;
 
+/**
+ * This is the constants class that stores shared screen and player values used across the game.
+ * @author Gurangad Batth
+ */
 public class Constants{
     // Player physicals and dimentions
     public static final int PLAYER_WIDTH = 32;

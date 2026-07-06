@@ -3,29 +3,29 @@ package controller;
 import java.awt.Graphics2D;
 
 /**
- * abstract base class representing a game state (screen/view).
- * all the game screens must implement update logic and the render graphics.
+ * This is the abstract parent class for every game state in the room game.
+ * Each state must know how to update itself and render itself.
+ * @author Gurangad Batth
  */
 public abstract class GameState {
     private GameStateManager gsm;
 
     /**
-     * constructor for GameState
-     * @param gsm the game state manager used to transition between states
+     * This is the constructor for a game state.
+     * @param gsm the game state manager that owns this state
      */
     public GameState(GameStateManager gsm){
         this.gsm = gsm;
     }
 
     /**
-     * updates the logic for the current state
+     * This method updates the logic of the current state.
      */
     public abstract void update();
-    
+
     /**
-     * render the graphics for the current state
-     * @param g2d the Graphics2D object used for drawing
+     * This method renders the current state to the screen.
+     * @param g2d the graphics object used to draw the state
      */
     public abstract void render(Graphics2D g2d);
-    
 }
