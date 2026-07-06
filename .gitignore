@@ -1,3 +1,7 @@
 .vscode/
 bin/
 *.class
+build/
+dist/
+release/
+tmp/

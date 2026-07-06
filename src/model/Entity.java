@@ -17,7 +17,7 @@ public abstract class Entity {
     private double y;
     private int width;
     private int height;
-    private Rectangle hitbox;;
+    private Rectangle hitbox;
 
     /**
      * This is the constructor for an entity.

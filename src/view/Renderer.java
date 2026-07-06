@@ -1,9 +1,13 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import javax.swing.JPanel;
 import controller.GameStateManager;
-import model.Player;
 import utils.Constants;
 
 /**
@@ -11,15 +15,20 @@ import utils.Constants;
  * @author Gurangad Batth
  */
 public class Renderer extends JPanel{
+    private static final long serialVersionUID = 1L;
+
     // temp instance of theif just to test the screen
-    private GameStateManager gsm;
+    private transient GameStateManager gsm;
 
     /**
      * This is the constructor for the renderer panel.
      * It enables double buffering for smoother drawing.
      */
+    @SuppressWarnings("this-escape")
     public Renderer(){
-        setDoubleBuffered(true);
+        setBackground(Color.BLACK);
+        setFocusable(true);
+        setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
     }
 
     /**
@@ -37,12 +46,17 @@ public class Renderer extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g.create();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.scale(Constants.WINDOW_SCALE, Constants.WINDOW_SCALE);
 
         if(gsm != null){
             gsm.render(g2d);
         }
 
+        g2d.dispose();
         Toolkit.getDefaultToolkit().sync();
     }
 }

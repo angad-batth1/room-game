@@ -11,9 +11,10 @@ import java.awt.event.MouseMotionListener;
  * @author Gurangad Batth
  */
 public class InputHandler implements KeyListener, MouseListener, MouseMotionListener {
+    private static final int KEY_CAPACITY = 512;
 
-    private boolean[] keys = new boolean[256];
-    private boolean[] mouseButtons = new boolean[4]; 
+    private final boolean[] keys = new boolean[KEY_CAPACITY];
+    private final boolean[] mouseButtons = new boolean[4];
     private int mouseX, mouseY;
 
     /**
@@ -22,7 +23,20 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
      * @return true if the key is down, false otherwise
      */
     public boolean isKeyDown(int keyCode) {
-        return keys[keyCode];
+        return keyCode >= 0 && keyCode < keys.length && keys[keyCode];
+    }
+
+    /**
+     * This method checks if a key is pressed and immediately clears it for one time actions.
+     * @param keyCode the key code being consumed
+     * @return true if the key was down before being cleared, false otherwise
+     */
+    public boolean consumeKeyPress(int keyCode){
+        if(!isKeyDown(keyCode)){
+            return false;
+        }
+        keys[keyCode] = false;
+        return true;
     }
 
     /**
@@ -114,7 +128,10 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
      */
     @Override
     public void keyPressed(KeyEvent e) { 
-        keys[e.getKeyCode()] = true; 
+        int keyCode = e.getKeyCode();
+        if(keyCode >= 0 && keyCode < keys.length){
+            keys[keyCode] = true;
+        }
     }
 
     /**
@@ -123,7 +140,10 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
      */
     @Override
     public void keyReleased(KeyEvent e) { 
-        keys[e.getKeyCode()] = false; 
+        int keyCode = e.getKeyCode();
+        if(keyCode >= 0 && keyCode < keys.length){
+            keys[keyCode] = false;
+        }
     }
 
     /**

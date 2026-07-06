@@ -1,8 +1,14 @@
 package model;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
 import utils.Constants;
 
 /**
@@ -31,28 +37,24 @@ public class LevelManager{
         currentLevelEntities.clear();
         player = null;
         // Now we can read the file using the try-catch block
-        try{
-
-            File levelFile = new File(filepath);
-            Scanner scanner = new Scanner(levelFile);
-            
+        try(BufferedReader reader = createLevelReader(filepath)){
             int row = 0;
             // Read the file line by line
-            while(scanner.hasNextLine()){
-                String line = scanner.nextLine();
+            String line;
+            while((line = reader.readLine()) != null){
                 // Loop through each character in the current line
                 for(int i = 0; i < line.length(); i++){
                     char currentChar = line.charAt(i);
                     // convert them to grid coordinate, size relative to player
-                    double xPos = i*Constants.PLAYER_WIDTH;
-                    double yPos = row*Constants.PLAYER_HEIGHT;
+                    double xPos = i * Constants.TILE_SIZE;
+                    double yPos = row * Constants.TILE_SIZE;
                     // Spawn objects based on the text character
                     if(currentChar == 'X'){
-                        currentLevelEntities.add(new Obstacle(xPos, yPos, 32, 32, 0));
+                        currentLevelEntities.add(new Obstacle(xPos, yPos, Constants.TILE_SIZE, Constants.TILE_SIZE, 0));
                     }else if(currentChar == 'L'){
-                        currentLevelEntities.add(new Obstacle(xPos, yPos, 32, 32, 10));
+                        currentLevelEntities.add(new Obstacle(xPos, yPos, Constants.TILE_SIZE, Constants.TILE_SIZE, 10));
                     }else if(currentChar == 'J'){
-                        currentLevelEntities.add(new Collectible(xPos, yPos, 32, 32, 100));
+                        currentLevelEntities.add(new Collectible(xPos, yPos, Constants.TILE_SIZE, Constants.TILE_SIZE, 100));
                     }else if(currentChar == 'P'){
                         player = new Player(xPos, yPos);
                         currentLevelEntities.add(player);
@@ -60,8 +62,7 @@ public class LevelManager{
                 }
                 row++;
             }
-            scanner.close();
-        }catch(FileNotFoundException e){
+        }catch(IOException e){
             e.printStackTrace();
         }
     }
@@ -82,10 +83,34 @@ public class LevelManager{
         return player;
     }
 
+    /**
+     * This helper method opens a level file from the filesystem first and then from bundled resources.
+     * @param filepath the requested level file path
+     * @return a buffered reader for the level file
+     * @throws IOException if the level file cannot be found or opened
+     */
+    private BufferedReader createLevelReader(String filepath) throws IOException{
+        Path path = Path.of(filepath);
+        if(Files.exists(path)){
+            return Files.newBufferedReader(path, StandardCharsets.UTF_8);
+        }
+
+        InputStream inputStream = LevelManager.class.getClassLoader().getResourceAsStream(filepath);
+        if(inputStream == null && filepath.startsWith("assets/")){
+            inputStream = LevelManager.class.getClassLoader().getResourceAsStream(filepath.substring("assets/".length()));
+        }
+
+        if(inputStream == null){
+            throw new FileNotFoundException("Could not find level file: " + filepath);
+        }
+
+        return new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+    }
+
     /*
     
     Since each character represents a 32x32 pixel block on the screen
-    X is a solid wall, P is where the theif drops in, J is a jewel, L is a laser.
+    X is a solid wall, P is where the theif drops in, J is a jewel, L is a floating hazard.
     Empty spaces are for air. This way, our textfiles can simply be a map.
     Without writing any code, we can load any number of levels.
     

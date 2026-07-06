@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class GameStateManager{
 
-    private Stack<GameState> states;
+    private final Stack<GameState> states;
 
     /**
      * This is the constructor for the game state manager.

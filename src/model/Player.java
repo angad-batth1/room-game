@@ -107,11 +107,27 @@ public class Player extends Entity{
     }
 
     /**
+     * This method restores the player's jewel count.
+     * @param jewelsCollected the number of jewels the player should currently have
+     */
+    public void setJewelsCollected(int jewelsCollected){
+        this.jewelsCollected = Math.max(0, jewelsCollected);
+    }
+
+    /**
      * Method to set if the player is grounded (on the ground)
      * @param grounded set the boolean to gounded.
      */
     public void setGrounded(boolean grounded){
         this.isGrounded = grounded;
+    }
+
+    /**
+     * This method checks whether the player is currently standing on solid ground.
+     * @return true if the player is grounded, false otherwise
+     */
+    public boolean isGrounded(){
+        return isGrounded;
     }
 
     /**

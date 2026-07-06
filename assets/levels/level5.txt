@@ -3,16 +3,16 @@ L            JJJJJJX   PL
 L           XXXXXXXX  XXL
 L                       L
 L        XX             L
-L                        
-L      XX                
-L                     XX 
-L    XX                L 
-L                      L 
-L  XX                  L 
-L                      L 
-LXX    XLLLLLLLLLLLLLLLL 
-LLXX    XXLLLLLLLLLLLLLL 
-LLLXX     XLLLLLLLLLLLLL 
-LLLLXXX                  
-LLLLLLLXX                
-LLLLLLLLLXXXXXXXXXXXXXXX
+L                       X
+L      XX               X
+L                    XX X
+L    XX                 X
+L                       X
+L  XX                   X
+L                       X
+LXX    XLLLLLLLLLLLLLLL X
+LLXX    XXLLLLLLLLLLLLL X
+LLLXX     XLLLLLLLLLLLL X
+LLLLXXX                 X
+LLLLLLLXX               X
+LLLLLLLLLXXXXXXXXXXXXXXXX

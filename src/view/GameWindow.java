@@ -1,7 +1,12 @@
-package view; 
+package view;
 
-import javax.swing.*;
-import controller.*;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import controller.GameLoop;
+import controller.GameStateManager;
+import controller.InputHandler;
+import controller.MainMenuState;
 import utils.Constants;
 
 /**
@@ -10,7 +15,7 @@ import utils.Constants;
  */
 public class GameWindow{
     // Our only instance is the JFrame
-    private JFrame frame;
+    private final JFrame frame;
 
     /**
      * This is the constructor for the game window.
@@ -18,29 +23,31 @@ public class GameWindow{
      */
     public GameWindow(){
         // Initialize the JFrame, set size, close operation.
-        frame = new JFrame("Platformer Game");
-        frame.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        frame = new JFrame(Constants.WINDOW_TITLE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false); // Last year, this was not present and allowed people to stretch the window
         frame.setLocationRelativeTo(null); // Centers the window on the computer monitor
 
         // Instead of doing frame.add with a method, lets use renderer class to add our drawing canvas to this window
         Renderer renderer = new Renderer();
+        renderer.setPreferredSize(new Dimension(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
         InputHandler input = new InputHandler();
         GameStateManager gsm = new GameStateManager();
         renderer.setGSM(gsm);
 
         // add the keyboard listeners to the canvas
         renderer.addKeyListener(input);
-        renderer.setFocusable(true); // tells java panel is allowed to hear keyboard
 
         // load the first screen into the stack
         gsm.pushState(new MainMenuState(gsm, input));
 
 
         // add canvas to window and show
-        frame.add(renderer);
+        frame.setContentPane(renderer);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        SwingUtilities.invokeLater(renderer::requestFocusInWindow);
 
         // start the game
         GameLoop gameLoop = new GameLoop(gsm, renderer);

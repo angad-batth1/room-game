@@ -8,7 +8,7 @@ import java.awt.Graphics2D;
  * @author Gurangad Batth
  */
 public abstract class GameState {
-    private GameStateManager gsm;
+    protected final GameStateManager gsm;
 
     /**
      * This is the constructor for a game state.
