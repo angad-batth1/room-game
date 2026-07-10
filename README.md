@@ -2,6 +2,30 @@
 
 `The Heist` is a small Java platformer game where the player moves through dangerous rooms, collects every jewel, and avoids hazards to finish the run. -art/sprites by GPT-5.5. It utilizes core java principles to dynamically load in levels and test functions for programming efficiency.
 
+<p align="center">
+  <img src="assets/screenshots/main-menu.png" alt="The Heist main menu" width="760">
+</p>
+
+## Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/level-1-screen.png" alt="Gameplay in level 1" width="49%">
+  <img src="assets/screenshots/level-2-screen.png" alt="Gameplay in level 2" width="49%">
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/game-pause-screen.png" alt="The Heist pause screen" width="49%">
+  <img src="assets/screenshots/mission-failed-screen.png" alt="The Heist mission failed screen" width="49%">
+</p>
+
+<details>
+  <summary>Quick gameplay preview</summary>
+  <br>
+  <p align="center">
+    <img src="assets/gifs/gameplay.gif" alt="Short gameplay preview of The Heist" width="520">
+  </p>
+</details>
+
 ## What The Game Has
 
 - Multiple text dynamically loaded levels
@@ -65,4 +89,3 @@ This creates:
 This creates:
 
 - `release/The Heist.app`
-
